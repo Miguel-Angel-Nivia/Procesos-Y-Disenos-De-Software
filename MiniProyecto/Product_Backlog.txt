@@ -1,0 +1,56 @@
+1. Aplicación estilizada y minimalista:
+   - Asegúrate de mantener la simplicidad y la coherencia en el diseño para una experiencia de usuario agradable.
+
+2. Colores blanco y negro:
+   - Puedes considerar resaltar ciertos elementos clave con colores adicionales para mejorar la usabilidad y la estética.
+
+3. Login y registro específicos para los empleados:
+   - Asegúrate de implementar medidas de seguridad robustas, como autenticación de dos factores, para proteger la información sensible.
+
+4. Lista de productos:
+   - Agrega la opción de buscar y filtrar productos para facilitar la navegación en grandes inventarios.
+
+5. Integrar sistema de CRUD de agregacion para la base de datos:
+   - Asegurate de que se pueda agregar datos.
+
+6. Integrar sistema de CRUD de eliminacion para la base de datos:
+   - Asegurate de que se pueda eliminar datos.
+
+7. Integrar sistema de CRUD de modificiacion para la base de datos:
+   - Asegurate de que se pueda modificar datos.
+
+8. Sistema de reportes diarios de las ventas del día:
+   - Asegúrate de tener una entrega de reporte al dia de lo ocurrido en ventas.
+
+9. Agregar nuevos productos:
+   - Implementa validaciones adecuadas para garantizar la integridad de los datos al agregar nuevos productos.
+
+10. Barra de navegación lateral:
+   - Permite personalizar la disposición de la barra de navegación según las preferencias del usuario.
+
+11. Base de datos en SQL o Excel:
+   - Considera utilizar una base de datos más escalable y segura que SQL o Excel, como MySQL, PostgreSQL o MongoDB.
+
+12. Login centrado en la pantalla:
+    - Asegúrate de que el diseño sea receptivo para adaptarse a diferentes tamaños de pantalla.
+
+13. Botón para salir del sistema en esquina derecha:
+    - Asegúrate de implementar cierres de sesión seguros para proteger la privacidad de los usuarios.
+
+14. Opciones de login (usuario, correo, contraseña):
+    - Implementa medidas de seguridad contra ataques como la fuerza bruta.
+
+15. Interfaz de usuario inclusiva:
+    - Realiza pruebas de accesibilidad para garantizar que la aplicación sea fácilmente utilizable por personas con discapacidades visuales o motoras.
+
+16. Iconos grandes con imágenes del producto:
+    - Asegúrate de que los iconos sean lo suficientemente grandes y detallados para ser identificables fácilmente.
+
+17. Estadísticas de ventas y productos:
+    - Ofrece gráficos y visualizaciones claras para facilitar la interpretación de datos.
+
+18. Colores neutros para disminuir el cansancio visual:
+    - Considera permitir a los usuarios personalizar la paleta de colores según sus preferencias.
+
+19. Integración de pagos en factura:
+    - Asegúrate de cumplir con las regulaciones de seguridad de pagos en factura.
