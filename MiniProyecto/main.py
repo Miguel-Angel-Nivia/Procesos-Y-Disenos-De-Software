@@ -13,9 +13,9 @@ Requiere también poder visualizar al finalizar el día un reporte de las ventas
 import sqlite3
 
 # Primero ejectuamos conexion con la base de dato, debe existir y sino entonces se crea.
-coneccion = sqlite3.connect("dataOlimpica.db")
+conexion = sqlite3.connect("dataOlimpica.db")
 # Luego se necesita un cursor para navegar en la base de datos.
-cursor = coneccion.cursor()
+cursor = conexion.cursor()
 # Se crea inicialmente la tablas necesarias.
 
 def inicioSesion():
@@ -32,19 +32,19 @@ def inicioSesion():
     cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1003314411, 'Mauricio Torres', 3)")
     # cursor.execute("DELETE FROM PRODUCTOS")
     # Guardamos cualquier dato modificado.
-    coneccion.commit()
+    conexion.commit()
     return 0
 
 # Funcion para seguridad del sistema.
-def login():
+def login(): ########################## Chapid
     # Agregar que si no existe el usuario, que se agregue.
     identificacion = str(input("Quien eres? Escribe tu nombre: "))
     return identificacion
 
 # Funcion para tener las funcionalidades basicas respectivo a la base de datos sqlit3.
 def funcionalidades(entrada):
-    coneccion = sqlite3.connect("dataOlimpica.db")
-    cursor = coneccion.cursor()
+    conexion = sqlite3.connect("dataOlimpica.db")
+    cursor = conexion.cursor()
     if entrada == 1: # Agregar Productos
         print("Complete el siguiente formato sobre el producto a ingresar:")
         id_Prod = int(input("Id: "))
@@ -53,7 +53,7 @@ def funcionalidades(entrada):
         precio = int(input("Precio: "))
         try:
             cursor.execute(f"INSERT INTO PRODUCTOS VALUES ({id_Prod}, '{nombreP}',{cantidad}, {precio})")
-            coneccion.commit()
+            conexion.commit()
             print("\nAgregado Exitosamente")
         except sqlite3.IntegrityError:
             print("\nError: El ID proporcionado ya existe en la base de datos.")
@@ -65,7 +65,7 @@ def funcionalidades(entrada):
             cursor.execute(f"DELETE FROM PRODUCTOS WHERE id_Prod = {dato}")
         except ValueError:
             cursor.execute(f"DELETE FROM PRODUCTOS WHERE Nombre = '{dato}'")
-        coneccion.commit()
+        conexion.commit()
         print("Producto Eliminado Exitosamente")
 
     elif entrada == 3: # Modificar productos.
@@ -79,7 +79,7 @@ def funcionalidades(entrada):
             nombreP = str(input("\nNombre del producto a cambiar: "))
             nuevoPrecio = int(input("Nuevo Precio: "))
             cursor.execute(f"UPDATE PRODUCTOS SET Precio_$ = {nuevoPrecio} WHERE Nombre = '{nombreP}'")
-        coneccion.commit()
+        conexion.commit()
         print("Dato Modificado Exitosamente")
 
     elif entrada == 4: # Consulta de producto.
@@ -92,18 +92,20 @@ def funcionalidades(entrada):
         else:
             print("\nError, producto no encontrado.")
 
+    ##################### Vasquez
+            
     elif entrada == 5: # Agregar Vendedor
         print("Aca se vende tamal")
 
     elif entrada == 6: # Agregar Cliente
         print("Aca se vende pan")
 
-    elif entrada == 7: # Vender Producto
+    elif entrada == 7: # Generar Venta
         print("Aca se vende mariscos")
 
     else:
         print("\nError, entrada no aceptada, vuelva a intentarlo.")
-    coneccion.close()
+    conexion.close()
     return 0
 
 # Funcion principal que imprime y muestra resultados respecto a los productos en la base de datos.
@@ -136,19 +138,19 @@ def main():
             entrada = int(input("Opcion: "))
         elif id_R == 2:  # Vendedor
             print("\n-----------Bienvenido Vendedor-----------")
-            print("\nQue desea hacer:\n (3) Modificar Producto\n (4) Consultar Producto\n (6) Agregar Cliente\n (0) Salir")
+            print("\nQue desea hacer:\n (3) Modificar Producto\n (4) Consultar Producto\n (6) Agregar Cliente\n (7) Generar Venta\n (0) Salir")
             entrada = int(input("Opcion: "))
         else:   # Cliente
-            print("\n-----------Bienvenido Cliente-----------")
-            print("\n (4) Consultar Producto\n (7) Comprar Producto(0) Salir")
-            entrada = int(input("Opcion: "))
-        if entrada != 0:
-            funcionalidades(entrada)
-        else:
-            flag = False        
+            print("**Error, Permiso Denegado**")
+            flag = False
+        if flag == True:
+            if entrada != 0 and flag == True:
+                funcionalidades(entrada)
+            else:
+                flag = False        
     print("Muchas Gracias Por Usar El Sistema, Hasta Pronto!")
     # Se cierra la base de datos.
-    coneccion.close()
+    conexion.close()
     return 0
 
 main()
