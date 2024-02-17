@@ -35,17 +35,45 @@ def inicioSesion():
     conexion.commit()
     return 0
 
-# Funcion para seguridad del sistema.
-def login(): ########################## Chapid
-    # Agregar que si no existe el usuario, que se agregue.
-    identificacion = str(input("Quien eres? Escribe tu nombre: "))
-    return identificacion
+# Funcion para seguridad del sistema
+def verificacion(identificacion, op = 'No_validar'):
+    busqueda = None
+    cursor.execute(f"SELECT * FROM USUARIOS WHERE cc = '{identificacion}'")
+    busqueda  = cursor.fetchone()
+    print(busqueda)
+    if op == 'validar':
+        cursor.execute(f"SELECT id_R FROM ROLES WHERE Nombre = 'Administrador'")
+        rol = cursor.fetchone()
+        if busqueda[2] == rol[0]:
+            busqueda = True
+        else:
+            busqueda = False
+    return busqueda
+
+def login():
+    info = None
+    print('****Digite 0 para salir****')
+    identificacion = int(input("Ingrese identificacion: "))
+    if identificacion != 0:
+        busqueda = verificacion(identificacion)
+        if busqueda:
+            identificacion, nombre, id = busqueda
+            if id >2 or id < 1:
+                info = None, None, -1 
+            else:
+                info = identificacion, nombre, id
+        else:
+            info = None, None, -2
+    else:
+        info = None, None, 0
+    return info
+
 
 # Funcion para tener las funcionalidades basicas respectivo a la base de datos sqlit3.
-def funcionalidades(entrada):
+def funcionalidades(entrada, identificacion):
     conexion = sqlite3.connect("dataOlimpica.db")
     cursor = conexion.cursor()
-    if entrada == 1: # Agregar Productos
+    if entrada == 1 and verificacion(identificacion, 'validar'): # Agregar Productos
         print("Complete el siguiente formato sobre el producto a ingresar:")
         id_Prod = int(input("Id: "))
         cantidad = int(input("Cantidad: "))
@@ -58,7 +86,7 @@ def funcionalidades(entrada):
         except sqlite3.IntegrityError:
             print("\nError: El ID proporcionado ya existe en la base de datos.")
 
-    elif entrada == 2: # Eliminar productos.
+    elif entrada == 2 and verificacion(identificacion,'validar'): # Eliminar productos.
         dato = input("Nombre o id del producto a eliminar: ")
         try:
             dato = int(dato)
@@ -68,7 +96,7 @@ def funcionalidades(entrada):
         conexion.commit()
         print("Producto Eliminado Exitosamente")
 
-    elif entrada == 3: # Modificar productos.
+    elif entrada == 3 and verificacion(identificacion,'validar'): # Modificar productos.
         print("\nQue desea cambiar: \n (1) Cantidad De Producto\n (2) Precio De Producto")
         cambio = int(input("Opcion: "))
         if cambio == 1:
@@ -108,6 +136,56 @@ def funcionalidades(entrada):
     conexion.close()
     return 0
 
+    
+def inicio():
+    opcion = -1
+    while opcion > 1 or opcion <0:
+        print('(1) Login')
+        print('(0) Salir')
+        opcion = int(input('Opcion: '))
+    if opcion == 1:
+        identificacion, Nombre, id_R = login()
+        while id_R<0:
+            if id_R==-1:
+                print('Usuario invalido')
+            elif id_R==-2:
+                print('Usuario no encontrado')
+            identificacion, nombre, id_R = login()
+        if id_R == 0:
+            inicio()
+        else:
+            opcion = None
+            while opcion != 0:
+                if id_R ==1:
+                    opcion = menu(id_R)
+                elif id_R == 2:
+                    opcion = menu(id_R)
+                else:
+                    opcion = menu()
+                if opcion !=0:
+                    funcionalidades(opcion, identificacion)
+            inicio()
+    elif opcion == 0:
+        print("Muchas Gracias Por Usar El Sistema, Hasta Pronto!")
+
+def menu(opcion = 0):
+    ans = -1
+    if opcion == 0:
+        print("**Error, Permiso Denegado")
+        ans = 0
+    elif opcion == 1:
+        print("\n-----------Bienvenido Jefe-----------")
+        print("Que desea hacer:\n (1) Agregar Producto\n (2) Eliminar Producto\n (3) Modificar Producto\n (4) Consultar Producto\n (5) Agregar Vendedor\n (6) Agregar Cliente\n (0) Salir")
+    elif opcion == 2:
+
+        print("\n-----------Bienvenido Vendedor-----------")
+        print("\nQue desea hacer:\n (3) Modificar Producto\n (4) Consultar Producto\n (6) Agregar Cliente\n (7) Generar Venta\n (0) Salir")
+    else:
+        print("ROL INVALIDO")
+    while ans>7 or ans <0:
+        ans = int(input("Opcion: "))
+    return ans
+
 # Funcion principal que imprime y muestra resultados respecto a los productos en la base de datos.
 def main():
     inicioSesion()
@@ -125,30 +203,7 @@ def main():
     # Aqui deberia haber un login antes de ingresar.
     # return 0
     print("En este sistema podras, agregar, eliminar y modificar datos respectivos al inventario del supermercado")
-    identificacion = login()
-    cursor.execute(f"SELECT * FROM USUARIOS WHERE Nombre = '{identificacion}'")
-    info = cursor.fetchone()
-    CC, Nombre, id_R = info
-    flag = True
-    while flag:
-        # Aqui deberia ir un entrada respecto al login que se hizo para saber que puede salir en pantalla o no.
-        if id_R == 1:  # Administrador
-            print("\n-----------Bienvenido Jefe-----------")
-            print("Que desea hacer:\n (1) Agregar Producto\n (2) Eliminar Producto\n (3) Modificar Producto\n (4) Consultar Producto\n (5) Agregar Vendedor\n (6) Agregar Cliente\n (0) Salir")
-            entrada = int(input("Opcion: "))
-        elif id_R == 2:  # Vendedor
-            print("\n-----------Bienvenido Vendedor-----------")
-            print("\nQue desea hacer:\n (3) Modificar Producto\n (4) Consultar Producto\n (6) Agregar Cliente\n (7) Generar Venta\n (0) Salir")
-            entrada = int(input("Opcion: "))
-        else:   # Cliente
-            print("**Error, Permiso Denegado**")
-            flag = False
-        if flag == True:
-            if entrada != 0 and flag == True:
-                funcionalidades(entrada)
-            else:
-                flag = False        
-    print("Muchas Gracias Por Usar El Sistema, Hasta Pronto!")
+    inicio()
     # Se cierra la base de datos.
     conexion.close()
     return 0
