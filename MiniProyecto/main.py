@@ -11,7 +11,7 @@ Requiere también poder visualizar al finalizar el día un reporte de las ventas
 """
 
 import sqlite3
-
+from datetime import datetime
 # Primero ejectuamos conexion con la base de dato, debe existir y sino entonces se crea.
 conexion = sqlite3.connect("dataOlimpica.db")
 # Luego se necesita un cursor para navegar en la base de datos.
@@ -21,31 +21,30 @@ cursor = conexion.cursor()
 def inicioSesion():
     cursor.execute("CREATE TABLE IF NOT EXISTS VENTAS (id_Venta INTEGER PRIMARY KEY, CC_Cliente INTEGER, Fecha TEXT NOT NULL, Total_$ INTEGER)")
     cursor.execute("CREATE TABLE IF NOT EXISTS ROLES (id_R INTEGER PRIMARY KEY, Nombre TEXT NOT NULL)")
-    cursor.execute("CREATE TABLE IF NOT EXISTS USUARIOS (CC INTEGER PRIMARY KEY, Nombre TEXT NOT NULL, id_R)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS USUARIOS (CC INTEGER PRIMARY KEY,Contrasena TEXT NOT NULL, Nombre TEXT NOT NULL, id_R)")
     cursor.execute("CREATE TABLE IF NOT EXISTS PRODUCTOS (id_Prod INTEGER PRIMARY KEY, Nombre TEXT NOT NULL, Cantidad INTEGER, Precio_$ INTEGER)")
     # Roles default
     cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (1, 'Administrador')")
     cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (2, 'Vendedor')")
     cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (3, 'Cliente')")
     # Agregacion Del Administrador
-    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1245711933, 'Mike Ross', 1)")
-    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1225700032, 'Ana Maria', 2)")
-    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1003314411, 'Mauricio Torres', 3)")
+    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1245711933, 'Dorime69!', 'Mike Ross', 1)")
+    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1225700032, 'Jijija44$', 'Ana Maria', 2)")
+    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1003314411, 'eyeypeq9!', 'Mauricio Torres', 3)")
     # cursor.execute("DELETE FROM PRODUCTOS")
     # Guardamos cualquier dato modificado.
     conexion.commit()
     return 0
 
 # Funcion para seguridad del sistema
-def verificacion(identificacion, op = 'No_validar'):
+def verificacion(info, op = 'No_validar'):
     busqueda = None
-    cursor.execute(f"SELECT * FROM USUARIOS WHERE cc = '{identificacion}'")
+    cursor.execute(f"SELECT * FROM USUARIOS WHERE cc = '{info[0]}'and Contrasena = '{info[1]}'")
     busqueda  = cursor.fetchone()
-    print(busqueda)
     if op == 'validar':
         cursor.execute(f"SELECT id_R FROM ROLES WHERE Nombre = 'Administrador'")
         rol = cursor.fetchone()
-        if busqueda[2] == rol[0]:
+        if busqueda[3] == rol[0]:
             busqueda = True
         else:
             busqueda = False
@@ -69,26 +68,27 @@ def login():
     info = None
     print('****Digite 0 para salir****')
     identificacion = int(input("Ingrese identificacion (CC): "))
+    #no se puede ocultar la contrasenia en el entorno de desarrollo
     if identificacion != 0:
-        busqueda = verificacion(identificacion)
+        contrasena = input("Ingrese contrasenia: ")
+        busqueda = verificacion((identificacion, contrasena))
         if busqueda:
-            identificacion, nombre, id = busqueda
-            if id >2 or id < 1:
-                info = None, None, -1 
+            if busqueda[3] >2 or busqueda[3] < 1:
+                info = None, None, None, -1
             else:
-                info = identificacion, nombre, id
+                info = busqueda
         else:
-            info = None, None, -2
+            info = None, None, None, -2
     else:
-        info = None, None, 0
+        info = None, None, None, 0
     return info
 
 
 # Funcion para tener las funcionalidades basicas respectivo a la base de datos sqlit3.
-def funcionalidades(entrada, identificacion):
+def funcionalidades(entrada,info):
     conexion = sqlite3.connect("dataOlimpica.db")
     cursor = conexion.cursor()
-    if entrada == 1 and verificacion(identificacion, 'validar'): # Agregar Productos
+    if entrada == 1 and verificacion(info, 'validar'): # Agregar Productos
         print("Complete el siguiente formato sobre el producto a ingresar:")
         id_Prod = int(input("Id: "))
         cantidad = int(input("Cantidad: "))
@@ -101,7 +101,7 @@ def funcionalidades(entrada, identificacion):
         except sqlite3.IntegrityError:
             print("\nError: El ID proporcionado ya existe en la base de datos.")
 
-    elif entrada == 2 and verificacion(identificacion,'validar'): # Eliminar productos.
+    elif entrada == 2 and verificacion(info,'validar'): # Eliminar productos.
         dato = input("Nombre o id del producto a eliminar: ")
         try:
             dato = int(dato)
@@ -111,7 +111,7 @@ def funcionalidades(entrada, identificacion):
         conexion.commit()
         print("Producto Eliminado Exitosamente")
 
-    elif entrada == 3 and verificacion(identificacion,'validar'): # Modificar productos.
+    elif entrada == 3 and verificacion(info,'validar'): # Modificar productos.
         print("\nQue desea cambiar: \n (1) Cantidad De Producto\n (2) Precio De Producto")
         cambio = int(input("Opcion: "))
         if cambio == 1:
@@ -193,7 +193,7 @@ def funcionalidades(entrada, identificacion):
                     print("Error: Cantidad insuficiente o producto no encontrado.")
 
         # Registrar la venta en la base de datos
-        fecha_venta = input("Ingrese la fecha de la venta (YYYY-MM-DD): ")
+        fecha_venta = datetime.now().date()
         cursor.execute(f"INSERT INTO VENTAS (CC_Cliente, Fecha, Total_$) VALUES ({cc_cliente}, '{fecha_venta}', {total_venta})")
         venta_id = cursor.lastrowid
         conexion.commit()
@@ -215,32 +215,33 @@ def funcionalidades(entrada, identificacion):
 
     
 def inicio():
+    usuario = None
     opcion = -1
     while opcion > 1 or opcion <0:
         print('(1) Login')
         print('(0) Salir')
         opcion = int(input('Opcion: '))
     if opcion == 1:
-        identificacion, Nombre, id_R = login()
-        while id_R<0:
-            if id_R==-1:
+        usuario = login()
+        while usuario[3] < 0:
+            if usuario[3] == -1:
                 print('Usuario invalido')
-            elif id_R==-2:
-                print('Usuario no encontrado')
-            identificacion, nombre, id_R = login()
-        if id_R == 0:
+            elif usuario[3] == -2:
+                print('Usuario no encontrado o informacion erronea')
+            usuario = login()
+        if usuario[3] == 0:
             inicio()
         else:
             opcion = None
             while opcion != 0:
-                if id_R ==1:
-                    opcion = menu(id_R)
-                elif id_R == 2:
-                    opcion = menu(id_R)
+                if usuario[3] ==1:
+                    opcion = menu(usuario[3])
+                elif usuario[3] == 2:
+                    opcion = menu(usuario[3])
                 else:
                     opcion = menu()
                 if opcion !=0:
-                    funcionalidades(opcion, identificacion)
+                    funcionalidades(opcion, usuario[:2])
             inicio()
     elif opcion == 0:
         print("Muchas Gracias Por Usar El Sistema, Hasta Pronto!")
