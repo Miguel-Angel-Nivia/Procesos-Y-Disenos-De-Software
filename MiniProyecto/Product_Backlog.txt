@@ -22,7 +22,7 @@
 8. Sistema de reportes diarios de las ventas del día:
    - Asegúrate de tener una entrega de reporte al dia de lo ocurrido en ventas.
 
-9. Agregar nuevos productos:
+9. Agregar nuevos productos: \\\\\\\\\\
    - Implementa validaciones adecuadas para garantizar la integridad de los datos al agregar nuevos productos.
 
 10. Barra de navegación lateral:
@@ -37,7 +37,7 @@
 13. Botón para salir del sistema en esquina derecha:
     - Asegúrate de implementar cierres de sesión seguros para proteger la privacidad de los usuarios.
 
-14. Opciones de login (usuario, correo, contraseña):
+14. Opciones de login (usuario, correo, contraseña): \\\\\\\\\\\\\\\\\
     - Implementa medidas de seguridad contra ataques como la fuerza bruta.
 
 15. Interfaz de usuario inclusiva:
