@@ -82,6 +82,7 @@ def mostrar_clientes():
 def mostrar_productos_disponibles():
     cursor.execute("SELECT * FROM PRODUCTOS")
     productos_disponibles = cursor.fetchall()
+    print(type(productos_disponibles))
     print("\nProductos Disponibles:\n")
     encabezado = ["ID","NOMBRE","CANTIDAD","PRECIO"]
     print("{:<10} {:<15} {:<10} {:<10}".format(*encabezado))
@@ -185,8 +186,8 @@ def funcionalidades(entrada,info):
     elif entrada == 5 and verificacion(info,'validar'): # Agregar Vendedor
         print("Complete el siguiente formato sobre el vendedor")
         cedula = int(input("CC: "))
-        nombreV = int(input("Nombre: "))
-        contrasena = int(input("Contraseña: "))
+        nombreV = input("Nombre: ")
+        contrasena = input("Contraseña: ")
         try:
             cursor.execute(f"INSERT INTO USUARIOS VALUES ({cedula}, '{contrasena}' , '{nombreV}',{2})")
             conexion.commit()
