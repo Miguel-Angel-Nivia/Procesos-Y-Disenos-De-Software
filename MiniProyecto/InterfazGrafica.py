@@ -1,11 +1,11 @@
 import sys
+from conexionSQL import Comunicacion
 from PyQt5 import QtWidgets, uic
 
 
 #Iniciar la aplicacion
 
 app = QtWidgets.QApplication([])
-
 
 #cargar archivos .ui
 inicio = uic.loadUi("ventanas/inicio.ui")

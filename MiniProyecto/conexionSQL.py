@@ -322,5 +322,31 @@ class Comunicacion():
 		self.conexion.commit()
 		return ans
 	
+	# funciones de sistema y verificacion
+	def inicio(self) -> None:
+		self.conexion = sqlite3.connect("dataOlimpica.db")
 	def cerrar(self) -> None:
 		self.conexion.close()
+	def verificar_administrador(self, informacion: tuple)-> bool:
+		ans = False
+		cursor = self.conexion.cursor()
+		try:
+			cursor.execute(f"SELECT id_R FROM USUARIOS WHERE CC = ({informacion[0]}) && Contrasena = ({informacion[1]})")
+			busqueda = cursor.fetchone()
+			if busqueda[0] == 1:
+				ans = True
+		except:
+			pass
+		return ans
+	
+	def verificar_usuario(self, informacion: tuple)-> int:
+		ans = None
+		cursor = self.conexion.cursor()
+		try:
+			cursor.execute(f"SELECT id_R FROM USUARIOS WHERE CC = ({informacion[0]}) && Contrasena = ({informacion[1]})")
+			busqueda = cursor.fetchone()
+			if busqueda:
+				ans = busqueda
+		except:
+			pass
+		return ans
