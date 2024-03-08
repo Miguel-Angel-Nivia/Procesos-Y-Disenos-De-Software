@@ -1,48 +1,51 @@
 import sqlite3
 from datetime import datetime
-from typing inport Union
+from typing import Union
+
 class Comunicacion():
 	def __init__(self):
 		self.conexion = sqlite3.connect("dataOlimpica.db")
+
 	def inicio_sesion(self) -> None:
 		cursor = self.conexion.cursor()
 		cursor.execute("CREATE TABLE IF NOT EXISTS LOGSISTEMA (fecha TIMESTAMP, mensaje TEXT)")
 		cursor.execute("CREATE TABLE IF NOT EXISTS VENTAS (id_Venta INTEGER PRIMARY KEY, CC_Cliente INTEGER, Fecha TEXT NOT NULL, Total_$ INTEGER)")
-	    cursor.execute("CREATE TABLE IF NOT EXISTS ROLES (id_R INTEGER PRIMARY KEY, Nombre TEXT NOT NULL)")
-	    cursor.execute("CREATE TABLE IF NOT EXISTS USUARIOS (CC INTEGER PRIMARY KEY,Contrasena TEXT NOT NULL, Nombre TEXT NOT NULL, id_R)")
-	    cursor.execute("CREATE TABLE IF NOT EXISTS PRODUCTOS (id_Prod INTEGER PRIMARY KEY, Nombre TEXT NOT NULL, Cantidad INTEGER, Precio_$ INTEGER)")
-	    cursor.execute("CREATE TABLE IF NOT EXISTS CLIENTES (CC INTEGER PRIMARY KEY, Nombre TEXT NOT NULl, Puntos INTEGER)")
+		cursor.execute("CREATE TABLE IF NOT EXISTS ROLES (id_R INTEGER PRIMARY KEY, Nombre TEXT NOT NULL)")
+		cursor.execute("CREATE TABLE IF NOT EXISTS USUARIOS (CC INTEGER PRIMARY KEY,Contrasena TEXT NOT NULL, Nombre TEXT NOT NULL, id_R)")
+		cursor.execute("CREATE TABLE IF NOT EXISTS PRODUCTOS (id_Prod INTEGER PRIMARY KEY, Nombre TEXT NOT NULL, Cantidad INTEGER, Precio_$ INTEGER)")
+		cursor.execute("CREATE TABLE IF NOT EXISTS CLIENTES (CC INTEGER PRIMARY KEY, Nombre TEXT NOT NULl, Puntos INTEGER)")
 	    
 	    # Roles default
-	    cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (1, 'Administrador')")
-	    cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (2, 'Vendedor')")
+		cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (1, 'Administrador')")
+		cursor.execute("INSERT OR IGNORE INTO ROLES VALUES (2, 'Vendedor')")
 	    # Agregacion Del Administrador
-	    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1245711933, 'Dorime69!', 'Mike Ross', 1)")
-	    cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1225700032, 'Jijija44$', 'Ana Maria', 2)")
-	    # Productos Basicos
-	    cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('PAPA', 40, 450)")
-	    cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('ZANAHORIA', 20, 500)")
-	    cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('BANANO', 25, 600)")
-	    cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('TOMATE', 32, 300)")
-	    cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('CEBOLLA', 27, 550)")
+		cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1245711933, 'Dorime69!', 'Mike Ross', 1)")
+		cursor.execute("INSERT OR IGNORE INTO USUARIOS VALUES (1225700032, 'Jijija44$', 'Ana Maria', 2)")
+		# Productos Basicos
+		cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('PAPA', 40, 450)")
+		cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('ZANAHORIA', 20, 500)")
+		cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('BANANO', 25, 600)")
+		cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('TOMATE', 32, 300)")
+		cursor.execute("INSERT OR IGNORE INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('CEBOLLA', 27, 550)")
 	    # Clientes concurrentes
-	    cursor.execute("INSERT OR IGNORE INTO CLIENTES VALUES (1004534696, 'Willian', 7100)")
-	    self.conexion.commit()
+		cursor.execute("INSERT OR IGNORE INTO CLIENTES VALUES (1004534696, 'Willian', 7100)")
+		self.conexion.commit()
 
-	#funcion para llevar el log de las acciones hechas por el administrador
+	# funcion para llevar el log de las acciones hechas por el administrador
 	def registrar_cambio(self, mensaje:str) -> None:
 		cursor = self.conexion.cursor()
 		fecha = datetime.now().strftime("%Y-%m-%d  %H:%M:%S")
 		cursor.execute(f"INSERT INTO LOGSISTEMA (fecha, mensaje) values ({fecha},'{mensaje}'')")
-#funciones para administrar productos
+		
+	# funciones para administrar productos
 	def nuevo_producto(self,user:str, producto:str, cantidad:int, precio: int) -> bool:
 		ans  = False
 		cursor = self.conexion.cursor()
 		try:
-			cursor.execute("SELECT * FROM PRODUCTOS WHERE Nombre = ('{producto}')")
+			cursor.execute(f"SELECT * FROM PRODUCTOS WHERE Nombre = ('{producto}')")
 			producto_existente = cursor.fetchone()
 			if not producto_existente:
-				cursor.execute(f"INSERT INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('{producto}',{cantidad},{precio})"):
+				cursor.execute(f"INSERT INTO PRODUCTOS (Nombre, Cantidad, Precio_$) VALUES ('{producto}',{cantidad},{precio})")
 				self.registrar_cambio(f"{user} anadio{producto}, con {cantidad} unidad/s con precio {precio} a productos")
 				ans = True
 			else:
@@ -56,29 +59,27 @@ class Comunicacion():
 		cursor = self.conexion.cursor()
 		if isinstance(identificador, int):
 			try:
-				info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE id_Prod = {id}")
-				cursor.execute(f"DELETE FROM PRODUCTOS WHERE id_Prod = {id}")
+				info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE id_Prod = {identificador}")
+				cursor.execute(f"DELETE FROM PRODUCTOS WHERE id_Prod = {identificador}")
 				self.registrar_cambio(f"{user} elimino el producto {info[1]} con id {0}, cantidad: {info[2]}, precio{info[3]} ")			
 				ans = True
 			except:
-				self.registrar_cambio(f"{user} intento eliminar el producto con id {id}")
+				self.registrar_cambio(f"{user} intento eliminar el producto con id {identificador}")
 		elif isinstance(identificador, str):
 			try:
-				info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE nombre = {nombre}")
-				cursor.execute(f"DELETE FROM PRODUCTOS WHERE nombre = {nombre}")
+				info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE nombre = {identificador}")
+				cursor.execute(f"DELETE FROM PRODUCTOS WHERE nombre = {identificador}")
 				self.registrar_cambio(f"{user} elimino el producto {info[1]} con id {info[0]}, cantidad: {info[2]}, precio{info[3]} ")
 				ans = True
 			except:
-				self.registrar_cambio(f"{user} intento eliminar el producto con nombre {producto}")
+				self.registrar_cambio(f"{user} intento eliminar el producto con nombre {identificador}")
 		self.conexion.commit()
 		return ans
-
-
 
 	def modificar_producto(self, user:str, identificador:Union[int,str], **kwargs) -> bool:
 		ans = False
 		cursor = self.conexion.cursor()
-		def actualizar_cantidad(nueva_cantidad:int, identificador[int, str]) -> None:
+		def actualizar_cantidad(self, nueva_cantidad:int, identificador:Union[int, str]) -> None:
 			if isinstance(identificador,int):
 				try:
 					info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE id_Prod = {identificador}")
@@ -95,7 +96,8 @@ class Comunicacion():
 					ans = True
 				except:
 					self.registrar_cambio(f"{user} intento actualizar la cantidad del producto con nombre {identificador}")
-		def actualizar_precio(nueva_cantidad:int, identificador[int, str]) -> None:
+		
+		def actualizar_precio(nueva_cantidad:int, identificador:Union[int, str]) -> None:
 			if isinstance(identificador,int):
 				try:
 					info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE id_Prod = {identificador}")
@@ -112,7 +114,7 @@ class Comunicacion():
 					ans = True
 				except:
 					self.registrar_cambio(f"{user} intento actualizar el precio del  producto con nombre {identificador}")
-		def actualizar_nombre(nuevo_nombre:str, identificador[int, str]) -> bool:
+		def actualizar_nombre(nuevo_nombre:str, identificador:Union[int, str]) -> bool:
 			ans = False
 			if isinstance(identificador,int):
 				try:
@@ -131,7 +133,7 @@ class Comunicacion():
 			elif isinstance(identificador, str):
 				try:
 					cursor.execute(f"SELECT * FROM PRODUCTOS WHERE Nombre = ('{nuevo_nombre}')")
-					producto_existente = fetchone()
+					producto_existente = cursor.fetchone()
 					info = cursor.execute(f"SELECT * FROM PRODUCTOS WHERE nombre = {identificador}")
 					if not producto_existente:
 						cursor.execute(f"UPDATE  PRODUCTOS SET nombre = {nuevo_nombre} WHERE nombre = {identificador}")
@@ -145,36 +147,36 @@ class Comunicacion():
 		if 'cantidad' in kwargs:
 			actualizar_cantidad(kwargs['cantidad'])
 		elif 'precio' in kwargs:
-			 actualizar_precio(kwargs['precio'])
+			actualizar_precio(kwargs['precio'])
 		elif 'nombre' in kwargs:
 			actualizar_nombre(kwargs['nombre'])
 		self.conexion.commit()
 		return ans
 
-	def consulta_producto(self, identificador:Union[str,int]) -> Tuple:
+	def consulta_producto(self, identificador:Union[str,int]) -> tuple:
 		ans = tuple()
 		cursor = self.conexion.cursor()
 		if isinstance(identificador,int):
 			try:
 				cursor.execute(f"SELECT * FROM PRODUCTOS WHERE id_Prod = '{identificador}")
-				busqueda = fetchone()
+				busqueda = cursor.fetchone()
 				ans = busqueda
 			except:
 				ans = tuple()
 		elif isinstance(identificador, str):
 			try:
 				cursor.execute(f"SELECT * FROM PRODUCTOS WHERE nombre = '{identificador}")
-				ans = fetchone()
+				ans = cursor.fetchone()
 			except:
 				ans = tuple()
 		return ans
+	
 	def consultar_productos(self) -> list:
 		ans = None
 		cursor = self.conexion.cursor()
 		cursor.execute("SELECT * FROM PRODUCTOS")
 		ans = cursor.fetchall()
 		return ans
-
 
 	#funciones para administrar usuarios
 	def agregar_vendedor(self, user:str, cc:int, nombre: str, contrasenia: str) -> bool:
@@ -235,6 +237,10 @@ class Comunicacion():
 				ans = True
 			except:
 				self.registrar_cambio(f"{user} intento actualizar la contrasenia del vendedor {identificador}")
+		if 'rango' in kwargs:
+			modificar_rango(kwargs['rango'])
+		elif 'contrasenia' in kwargs:
+			modificar_contrasenia(kwargs['contrasenia'])
 		self.conexion.commit()
 		return ans
 
@@ -244,15 +250,19 @@ class Comunicacion():
 		try:
 			cursor.execute("SELECT CC,, usuarios.nombre, roles.nombre from USUARIOS, ROLES whre usuarios.id_R = roles.id_R")
 			ans = cursor.fetchall()
+		except:
+			pass
 		return ans
 	#funciones con los clientes
 
-	def agregar_cliente(self, cc:int, nombre:str) -> bool:
+	def agregar_cliente(self, CC:int, nombre:str) -> bool:
 		ans = False
 		cursor = self.conexion.cursor()
 		try:
 			cursor.execute(f"INSERT INTO CLIENTES VALUES ({CC},'{nombre}',0)")
 			ans = True
+		except:
+			pass
 		self.conexion.commit()
 		return ans
 
@@ -262,6 +272,8 @@ class Comunicacion():
 		try:
 			cursor.execute(f"SELECT Puntos FROM CLIENTES WHERE CC = {cc}")
 			ans = cursor.fetchone()
+		except:
+			pass
 		return ans[0]
 
 	def modificar_puntos_cliente(self, cc:int, cantidad_puntos:int) -> bool:
@@ -271,7 +283,8 @@ class Comunicacion():
 			puntos = self.consultar_puntos_cliente(cc)
 			cursor.execute(f"UPDATE  CLIENTES SET Puntos = {puntos-cantidad_puntos} WHERE CC = {cc}")
 			ans = True
-
+		except:
+			pass
 		return ans
 
 	def consultar_usuarios(self) -> list:
@@ -280,10 +293,11 @@ class Comunicacion():
 		try:
 			cursor.execute("SELECT * from clientes")
 			ans = cursor.fetchall()
+		except:
+			pass
 		return ans
 
 	# funciones de ventas
-
 	def modificar_producto_venta(self, id_producto:int, cantidad:int) -> bool:
 		ans = False
 		cursor = self. conexion.cursor()
@@ -292,6 +306,8 @@ class Comunicacion():
 			producto = cursor.fetchone()
 			cursor.execute(f"UPDATE PRODUCTOS SET Cantidad = {producto[2]-cantidad} WHERE id_Prod = {id_producto}")
 			ans = True
+		except:
+			pass
 		self.conexion.commit()
 		return ans
 
@@ -301,6 +317,10 @@ class Comunicacion():
 		try:
 			cursor.execute(f"INSERT INTO VENTAS (CC_Cliente, Fecha, Total_$) VALUES ({cc}, '{fecha}',{total_venta}')")
 			ans = True
+		except:
+			pass
 		self.conexion.commit()
 		return ans
-
+	
+	def cerrar(self) -> None:
+		self.conexion.close()
