@@ -764,19 +764,20 @@ func _on_terminar_pressed():
 		lista_venta = []
 		lista_compra = []
 		$Separador/Datos/RealizarVenta/Contenedor/Venta/MensajeFinal.text = "Se Añadio La Compra"
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Confirmacion.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Nombre.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Cantidad.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Productos.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/AgregarCom.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/MensajeFinal.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/Terminar.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/MensajeGracias.show()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/cantidad_puntos.hide()
+		$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/pago_puntos.hide()
 	else:
 		$Separador/Datos/RealizarVenta/Contenedor/Venta/MensajeFinal.text = "Error"
 	#$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/pago_puntos.toggled(false)
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Confirmacion.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Nombre.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Cantidad.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Productos.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/AgregarCom.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/MensajeFinal.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/Terminar.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/MensajeGracias.show()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/cantidad_puntos.hide()
-	$Separador/Datos/RealizarVenta/Contenedor/Venta/Finalizar/pago_puntos.hide()
+
 func _on_consultar_vs_pressed():
 	vista_activa.hide()
 	vista_activa = $Separador/Datos/ConsultarVentas 

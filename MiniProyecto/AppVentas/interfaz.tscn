@@ -240,7 +240,7 @@ layout_mode = 2
 [node name="Venta" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/RealizarVenta"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-text = "12"
+text = "13"
 
 [node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/RealizarVenta"]
 layout_mode = 2
@@ -255,7 +255,7 @@ layout_mode = 2
 [node name="ConsultarVS" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarVentas"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-text = "13"
+text = "14"
 
 [node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarVentas"]
 layout_mode = 2
@@ -270,7 +270,8 @@ layout_mode = 2
 [node name="ConsultarVt" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarVenta"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-text = "14"
+text = "15
+"
 
 [node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarVenta"]
 layout_mode = 2
