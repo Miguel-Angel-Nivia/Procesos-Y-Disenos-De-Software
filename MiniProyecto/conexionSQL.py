@@ -1,3 +1,5 @@
+#Creacion de funciones para conexion con base de datos
+#Para migracion a Godot
 import sqlite3
 from datetime import datetime
 from typing import Union
