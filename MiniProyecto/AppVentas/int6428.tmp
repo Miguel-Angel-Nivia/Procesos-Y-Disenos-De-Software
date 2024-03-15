@@ -1,0 +1,580 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6we3fpwt4dxk"]
+
+[ext_resource type="Script" path="res://interfazCodigo.gd" id="1_n2adt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xch72"]
+bg_color = Color(0.2, 0.2, 0.294118, 1)
+
+[node name="Interfaz" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n2adt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.239216, 0.239216, 0.376471, 1)
+
+[node name="Separador" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 10.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Opciones" type="Panel" parent="Separador"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xch72")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Separador/Opciones"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -13.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Funciones" type="VBoxContainer" parent="Separador/Opciones/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ConsultarProductos" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="Productos" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarProductos"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "1"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarProductos"]
+layout_mode = 2
+text = "Consultar
+Productos"
+
+[node name="NuevoProducto" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="NuevoP" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/NuevoProducto"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "2
+"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/NuevoProducto"]
+layout_mode = 2
+text = "Nuevo
+Producto"
+
+[node name="EliminarProducto" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="EliminarP" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/EliminarProducto"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "3"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/EliminarProducto"]
+layout_mode = 2
+text = "Eliminar
+Producto"
+
+[node name="ModificarProducto" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="ModificarP" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ModificarProducto"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "4"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ModificarProducto"]
+layout_mode = 2
+text = "Modificar
+Producto"
+
+[node name="ConsultarVendedores" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="ConsultarVen" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarVendedores"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "5"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarVendedores"]
+layout_mode = 2
+text = "Consultar
+Vendedores
+"
+
+[node name="NuevoVendor" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="NuevoV" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/NuevoVendor"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "6"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/NuevoVendor"]
+layout_mode = 2
+text = "Nuevo
+Vendedor"
+
+[node name="EliminarVendedor" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="EliminarVen" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/EliminarVendedor"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "7"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/EliminarVendedor"]
+layout_mode = 2
+text = "Eliminar
+Vendedor
+"
+
+[node name="ModificarVendedor" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="Modificarven" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ModificarVendedor"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "8"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ModificarVendedor"]
+layout_mode = 2
+text = "Modificar
+Vendedor
+"
+
+[node name="ConsultarClientes" type="HBoxContainer" parent="Separador/Opciones/ScrollContainer/Funciones"]
+layout_mode = 2
+
+[node name="ConsultarCli" type="Button" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarClientes"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "9"
+
+[node name="Label" type="Label" parent="Separador/Opciones/ScrollContainer/Funciones/ConsultarClientes"]
+layout_mode = 2
+text = "Consultar
+Clientes
+"
+
+[node name="Datos" type="MarginContainer" parent="Separador"]
+custom_minimum_size = Vector2(950, 0)
+layout_mode = 2
+
+[node name="Login" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Cedula" type="TextEdit" parent="Separador/Datos/Login"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "CC"
+
+[node name="Contraseña" type="TextEdit" parent="Separador/Datos/Login"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "contraseña"
+
+[node name="Login" type="Button" parent="Separador/Datos/Login"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Aceptar"
+
+[node name="Label" type="Label" parent="Separador/Datos/Login"]
+layout_mode = 2
+
+[node name="ConsultarProductos" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+
+[node name="Producto" type="HBoxContainer" parent="Separador/Datos/ConsultarProductos"]
+layout_mode = 2
+
+[node name="Busqueda" type="VBoxContainer" parent="Separador/Datos/ConsultarProductos/Producto"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="IdProducto" type="TextEdit" parent="Separador/Datos/ConsultarProductos/Producto/Busqueda"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Id del producto"
+
+[node name="Buscar" type="Button" parent="Separador/Datos/ConsultarProductos/Producto/Busqueda"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "Buscar"
+
+[node name="Productos" type="ScrollContainer" parent="Separador/Datos/ConsultarProductos"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+
+[node name="Datos" type="GridContainer" parent="Separador/Datos/ConsultarProductos/Productos"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+columns = 5
+
+[node name="NuevoProducto" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NuevoP" type="VBoxContainer" parent="Separador/Datos/NuevoProducto"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Nombre" type="TextEdit" parent="Separador/Datos/NuevoProducto/NuevoP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Nombre"
+
+[node name="Cantidad" type="TextEdit" parent="Separador/Datos/NuevoProducto/NuevoP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Cantidad
+"
+
+[node name="Precio" type="TextEdit" parent="Separador/Datos/NuevoProducto/NuevoP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Precio $"
+
+[node name="Label" type="Label" parent="Separador/Datos/NuevoProducto/NuevoP"]
+layout_mode = 2
+
+[node name="Agregar" type="Button" parent="Separador/Datos/NuevoProducto/NuevoP"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "Agregar"
+
+[node name="EliminarProducto" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="EliminarP" type="VBoxContainer" parent="Separador/Datos/EliminarProducto"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Id" type="TextEdit" parent="Separador/Datos/EliminarProducto/EliminarP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Id del producto"
+
+[node name="Label" type="Label" parent="Separador/Datos/EliminarProducto/EliminarP"]
+layout_mode = 2
+
+[node name="Eliminar" type="Button" parent="Separador/Datos/EliminarProducto/EliminarP"]
+layout_mode = 2
+text = "Eliminar"
+
+[node name="ModificarProducto" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Contenedor" type="VBoxContainer" parent="Separador/Datos/ModificarProducto"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Id" type="TextEdit" parent="Separador/Datos/ModificarProducto/Contenedor"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "Id del producto"
+
+[node name="BuscarP" type="Button" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+text = "Buscar"
+
+[node name="Serador" type="Label" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+
+[node name="Nombre" type="HBoxContainer" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+
+[node name="Nombre" type="TextEdit" parent="Separador/Datos/ModificarProducto/Contenedor/Nombre"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "Nombre"
+
+[node name="Label" type="Label" parent="Separador/Datos/ModificarProducto/Contenedor/Nombre"]
+layout_mode = 2
+
+[node name="Cantidad" type="HBoxContainer" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+
+[node name="Cantidad" type="TextEdit" parent="Separador/Datos/ModificarProducto/Contenedor/Cantidad"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "Cantidad"
+
+[node name="Label" type="Label" parent="Separador/Datos/ModificarProducto/Contenedor/Cantidad"]
+layout_mode = 2
+
+[node name="Precio" type="HBoxContainer" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+
+[node name="Precio" type="TextEdit" parent="Separador/Datos/ModificarProducto/Contenedor/Precio"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "Precio"
+
+[node name="Label" type="Label" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+
+[node name="Cambiar" type="Button" parent="Separador/Datos/ModificarProducto/Contenedor"]
+layout_mode = 2
+text = "Aceptar
+"
+
+[node name="ConsultarVendedores" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+
+[node name="Producto" type="HBoxContainer" parent="Separador/Datos/ConsultarVendedores"]
+layout_mode = 2
+
+[node name="Busqueda" type="VBoxContainer" parent="Separador/Datos/ConsultarVendedores/Producto"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CC" type="TextEdit" parent="Separador/Datos/ConsultarVendedores/Producto/Busqueda"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "CC del vendedor a buscar"
+
+[node name="BuscarVent" type="Button" parent="Separador/Datos/ConsultarVendedores/Producto/Busqueda"]
+layout_mode = 2
+
+[node name="Productos" type="ScrollContainer" parent="Separador/Datos/ConsultarVendedores"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+
+[node name="Datos" type="GridContainer" parent="Separador/Datos/ConsultarVendedores/Productos"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+columns = 5
+
+[node name="NuevoVendor" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NuevoP" type="VBoxContainer" parent="Separador/Datos/NuevoVendor"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Nombre" type="TextEdit" parent="Separador/Datos/NuevoVendor/NuevoP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Nombre"
+
+[node name="CC" type="TextEdit" parent="Separador/Datos/NuevoVendor/NuevoP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "CC
+"
+
+[node name="Contraseña" type="TextEdit" parent="Separador/Datos/NuevoVendor/NuevoP"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Contraseña
+"
+
+[node name="Label" type="Label" parent="Separador/Datos/NuevoVendor/NuevoP"]
+layout_mode = 2
+
+[node name="AgregarV" type="Button" parent="Separador/Datos/NuevoVendor/NuevoP"]
+layout_mode = 2
+text = "Aceptar"
+
+[node name="EliminarVendedor" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="EliminarV" type="VBoxContainer" parent="Separador/Datos/EliminarVendedor"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CC" type="TextEdit" parent="Separador/Datos/EliminarVendedor/EliminarV"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "CC
+"
+
+[node name="Label" type="Label" parent="Separador/Datos/EliminarVendedor/EliminarV"]
+layout_mode = 2
+
+[node name="EliminarV" type="Button" parent="Separador/Datos/EliminarVendedor/EliminarV"]
+layout_mode = 2
+text = "Eliminar"
+
+[node name="ModificarVendedor" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Contenedor" type="VBoxContainer" parent="Separador/Datos/ModificarVendedor"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CC" type="TextEdit" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "CC"
+
+[node name="BuscarV" type="Button" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+layout_mode = 2
+text = "Buscar
+"
+
+[node name="Serador" type="Label" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+layout_mode = 2
+
+[node name="Rol" type="HBoxContainer" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+layout_mode = 2
+
+[node name="Rol" type="TextEdit" parent="Separador/Datos/ModificarVendedor/Contenedor/Rol"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "Rol
+"
+
+[node name="Label" type="Label" parent="Separador/Datos/ModificarVendedor/Contenedor/Rol"]
+layout_mode = 2
+
+[node name="Contraseña" type="HBoxContainer" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+layout_mode = 2
+
+[node name="Contraseña" type="TextEdit" parent="Separador/Datos/ModificarVendedor/Contenedor/Contraseña"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+placeholder_text = "Contraseña
+"
+
+[node name="Label" type="Label" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+layout_mode = 2
+
+[node name="AceptarV" type="Button" parent="Separador/Datos/ModificarVendedor/Contenedor"]
+layout_mode = 2
+text = "Aceptar"
+
+[node name="ConsultarClientes" type="VBoxContainer" parent="Separador/Datos"]
+visible = false
+layout_mode = 2
+
+[node name="Producto" type="HBoxContainer" parent="Separador/Datos/ConsultarClientes"]
+layout_mode = 2
+
+[node name="Busqueda" type="VBoxContainer" parent="Separador/Datos/ConsultarClientes/Producto"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="IdProducto" type="TextEdit" parent="Separador/Datos/ConsultarClientes/Producto/Busqueda"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "Id del producto"
+
+[node name="Buscar" type="Button" parent="Separador/Datos/ConsultarClientes/Producto/Busqueda"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "Buscar"
+
+[node name="Productos" type="ScrollContainer" parent="Separador/Datos/ConsultarClientes"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+
+[node name="Datos" type="GridContainer" parent="Separador/Datos/ConsultarClientes/Productos"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+columns = 5
+
+[node name="Salir" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1097.0
+offset_top = 10.0
+offset_right = 1140.0
+offset_bottom = 48.0
+text = "X"
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(202, 10)
+layout_mode = 0
+offset_left = -2.0
+offset_right = 198.0
+offset_bottom = 10.0
+
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/ConsultarProductos/Productos" to="." method="_on_productos_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/NuevoProducto/NuevoP" to="." method="_on_nuevo_p_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/EliminarProducto/EliminarP" to="." method="_on_eliminar_p_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/ModificarProducto/ModificarP" to="." method="_on_modificar_p_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/ConsultarVendedores/ConsultarVen" to="." method="_on_consultar_ven_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/NuevoVendor/NuevoV" to="." method="_on_nuevo_v_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/EliminarVendedor/EliminarVen" to="." method="_on_eliminar_ven_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/ModificarVendedor/Modificarven" to="." method="_on_modificarven_pressed"]
+[connection signal="pressed" from="Separador/Opciones/ScrollContainer/Funciones/ConsultarClientes/ConsultarCli" to="." method="_on_consultar_cli_pressed"]
+[connection signal="pressed" from="Separador/Datos/Login/Login" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="Separador/Datos/ConsultarProductos/Producto/Busqueda/Buscar" to="." method="_on_buscar_pressed"]
+[connection signal="pressed" from="Separador/Datos/NuevoProducto/NuevoP/Agregar" to="." method="_on_agregar_pressed"]
+[connection signal="pressed" from="Separador/Datos/EliminarProducto/EliminarP/Eliminar" to="." method="_on_eliminar_pressed"]
+[connection signal="pressed" from="Separador/Datos/ModificarProducto/Contenedor/BuscarP" to="." method="_on_buscar_p_pressed"]
+[connection signal="pressed" from="Separador/Datos/ModificarProducto/Contenedor/Cambiar" to="." method="_on_cambiar_pressed"]
+[connection signal="pressed" from="Separador/Datos/ConsultarVendedores/Producto/Busqueda/BuscarVent" to="." method="_on_buscar_vent_pressed"]
+[connection signal="pressed" from="Separador/Datos/NuevoVendor/NuevoP/AgregarV" to="." method="_on_agregar_v_pressed"]
+[connection signal="pressed" from="Separador/Datos/EliminarVendedor/EliminarV/EliminarV" to="." method="_on_eliminar_v_pressed"]
+[connection signal="pressed" from="Separador/Datos/ModificarVendedor/Contenedor/BuscarV" to="." method="_on_buscar_v_pressed"]
+[connection signal="pressed" from="Separador/Datos/ModificarVendedor/Contenedor/AceptarV" to="." method="_on_aceptar_v_pressed"]
+[connection signal="pressed" from="Separador/Datos/ConsultarClientes/Producto/Busqueda/Buscar" to="." method="_on_buscar_pressed"]
+[connection signal="pressed" from="Salir" to="." method="_on_salir_pressed"]

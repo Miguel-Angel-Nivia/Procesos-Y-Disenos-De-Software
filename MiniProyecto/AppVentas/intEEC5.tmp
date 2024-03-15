@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6we3fpwt4dxk"]
+
+[ext_resource type="Script" path="res://interfazCodigo.gd" id="1_n2adt"]
+
+[node name="Interfaz" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n2adt")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 58.0
+offset_right = 512.0
+offset_bottom = 120.0
+placeholder_text = "CC"
+
+[node name="TextEdit2" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 147.0
+offset_right = 516.0
+offset_bottom = 206.0
+placeholder_text = "contraseña"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 254.0
+offset_right = 307.0
+offset_bottom = 388.0
+text = "Aceptar"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
