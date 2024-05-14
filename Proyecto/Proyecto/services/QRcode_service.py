@@ -1,11 +1,10 @@
 import qrcode
-from datetime import datetime
-import os
-import qrcode.constants
+
 
 class QRGenerator():
-    def generate_code(self, code, name):
-        fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        qr_code = qrcode.make(f"{code}")
-        return qr_code
-        #qr_code.save(f"Proyecto/Proyecto/Codigos_Temporales/Codigo_qr_{name}_{fecha}.png")
+    def generate_code(self, code):
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+        qr.add_data(code)
+        qr.make(fit=True)
+        imagen_qr = qr.make_image(fill_color="black", back_color="white")
+        return imagen_qr

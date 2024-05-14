@@ -1,2 +1,3 @@
 from conexion_db import Comunicacion
 from login_service import autenticacion
+from QRcode_service import QRGenerator
