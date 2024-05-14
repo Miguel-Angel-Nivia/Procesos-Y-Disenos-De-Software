@@ -5,4 +5,4 @@ import comunicacion from .conexion_db
 
 
 def autenticacion():
-
+    pass

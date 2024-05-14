@@ -10,6 +10,7 @@ hover_accent_color = {"_hover": {"color": accent_text_color}}
 hover_accent_bg = {"_hover": {"background_color": accent_color}}
 content_width_vw = "90vw"
 navbar_width = "20em"
+sidebar_witdh = "20em"
 
 template_page_style = {"padding_top": "5em", "padding_x": ["auto", "2em"], "flex": "1"}
 
@@ -18,4 +19,16 @@ template_content_style = {
     "border_radius": border_radius,
     "padding": "1em",
     "margin_bottom": "2em",
+    "min_height":"90vh",
+}
+
+link_style = {
+    "color": accent_text_color,
+    "text_decoration": "none",
+    **hover_accent_color,
+}
+
+overlapping_button_style = {
+    "background_color": "white",
+    "border_radius": border_radius,
 }

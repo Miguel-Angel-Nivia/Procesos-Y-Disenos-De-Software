@@ -3,11 +3,18 @@ from ..styles import style_page
 
 
 def navbar_header() -> rx.Component:
-    return rx.box(
-            rx.link(
-                rx.image(src="/pujc-logo.svg"),
-            href="/"),
-        )
+   return rx.box(
+        # The logo.
+        rx.center(rx.image(src=rx.color_mode_cond("/pujc-logo.svg","/pujc-logo-dark.jpg"),
+                             height="100px", width = "100px", align = "center")),
+                            
+        align="center",
+        width="100%",
+        border_bottom=style_page.border,
+        padding_x="1em",
+        padding_y="2em"
+        
+    )
 
 
 def navbar_footer() -> rx.Component:
@@ -35,8 +42,8 @@ def navbar_content(text:str, url:str) -> rx.Component:
             ),
             border = rx.cond(
                 active,
-                f"1em solid {rx.color('accent',6)}",
-                f"1em solid {rx.color('gray',6)}",
+                f"1px solid {rx.color('accent',6)}",
+                f"1px solid {rx.color('gray',6)}",
             ),
             color = rx.cond(
                 active,
