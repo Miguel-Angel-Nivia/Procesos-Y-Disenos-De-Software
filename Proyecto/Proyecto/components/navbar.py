@@ -62,7 +62,7 @@ def navbar_content(text:str, url:str) -> rx.Component:
 
 def navbar() -> rx.Component:
     from reflex.page import get_decorated_pages
-    paginas_disponibles = ["home","dashboard","settings"]
+    paginas_disponibles = ["home","dashboard","settings","pedidos", "Administracion_pedidos"]
     return rx.box(
         rx.vstack(
             navbar_header(),

@@ -56,6 +56,7 @@ def menu_button() -> rx.Component:
                 rx.menu.separator(),
                 menu_item_link("About", "https://github.com/reflex-dev"),
                 menu_item_link("Contact", "mailto:founders@=reflex.dev"),
+                menu_item_link("Cerrar Sesion", "/login"),
             ),
         ),
         position="fixed",

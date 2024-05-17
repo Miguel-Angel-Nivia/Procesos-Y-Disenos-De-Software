@@ -32,3 +32,11 @@ overlapping_button_style = {
     "background_color": "white",
     "border_radius": border_radius,
 }
+
+
+# style login
+style_login = {
+    "height" :"90vh",
+    "width" : "80%",
+    "margin":"auto",
+}
