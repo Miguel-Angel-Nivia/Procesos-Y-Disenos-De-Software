@@ -69,7 +69,7 @@ def login_page() -> rx.Component:
                     form_login_general("Usuario", "Ingrese su usuario",
                             "Ingrese un usuario valido", "username",
                             LoginState.set_username, LoginState.user_empty),
-                    form_login("Contrasenia", "Ingresse su contrasenia", "password",
+                    form_login("Contrasenia", "Ingrese su contrasenia", "password",
                                LoginState.set_password, "password"),
                     rx.form.submit(
                         rx.cond(

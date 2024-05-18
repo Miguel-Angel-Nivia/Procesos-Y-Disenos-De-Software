@@ -74,7 +74,7 @@ class Comunicacion():
         self.cursor.execute("INSERT INTO DISPOSITIVOS VALUES (4, 'DRON', 'ACTIVO')")
         self.cursor.execute("INSERT INTO DISPOSITIVOS VALUES (5, 'DRON', 'INACTIVO')")
         self.cursor.execute("INSERT INTO USUARIOS VALUES (100, 'Miguel', 'Nivia', 'miguelangelnivia@gmail.com', '1111111111')")
-        self.cursor.execute("INSERT INTO USUARIOS VALUES (101, 'Willian', 'Chapid', 'wilian17ch@gmail.com', '1111111112')")
+        self.cursor.execute("INSERT INTO USUARIOS VALUES (101, 'Willian', 'Chapid', 'willian17ch@gmail.com', '1111111112')")
         self.cursor.execute("INSERT INTO USUARIOS VALUES (102, 'Daniel', 'Vazquez', 'danielvasquez2004@javerianacali.edu.co', '1111111113')")
         self.cursor.execute("INSERT INTO USUARIOS VALUES (103, 'Jhon', 'Gomez', 'jhon.gomezt@javerianacali.edu.co', '1111111114')")
         self.cursor.execute("INSERT INTO ADMINISTRADORES VALUES (100, 100, 'ultrablue','UltraKinGGai$777')")
@@ -219,9 +219,8 @@ class Comunicacion():
             ans = True
         return ans
     def verification_user(self, data):
-        ans = False
         sql = "SELECT email FROM usuarios WHERE id  = ?"
-        self.cursor.execute(sql, (data))
+        self.cursor.execute(f"SELECT email FROM usuarios WHERE id  = ({data})")
         busqueda = self.cursor.fetchone()
         if busqueda:
             return busqueda
@@ -230,4 +229,4 @@ class Comunicacion():
     
 #comunicacion = Comunicacion()
 #comunicacion.inicio_base()
-#comunicacion.datos_base()
+##comunicacion.datos_base()
